@@ -61,3 +61,14 @@ def add(order_id, symbol, dir, price, size):
 
     write_to_exchange(ex, params)
     # TODO
+
+def convert(order_id, symbol, dir, size)
+    ex = connect()
+
+    params = {
+        "type": "convert",
+        "order_id": order_id,
+        "symbol": symbol,
+        "dir": dir,
+        "size": size,
+    }

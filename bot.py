@@ -238,6 +238,23 @@ def main():
 
                     print("converted!")
 
+                if xlf_count < -90:
+                    convert_order = {"type": "convert", "order_id": 69, "symbol":"XLF", "dir":"BUY", "size":10}
+                    print("converted BUY xlf 10")
+                    write_to_exchange(exchange, convert_order)
+                    print("Command sent:", convert_order, file=log_file)
+                    print("The exchange replied:", read_from_exchange(exchange), file=log_file)
+                    buy_order = {"type": "add", "order_id": 200, "symbol": "BOND", "dir": "BUY", "price": cartp_sell["BOND"], "size": 3}
+                    write_to_exchange(exchange, buy_order)
+                    buy_order = {"type": "add", "order_id": 201, "symbol": "GS", "dir": "BUY", "price": cartp_sell["GS"], "size": 2}
+                    write_to_exchange(exchange, buy_order)
+                    buy_order = {"type": "add", "order_id": 202, "symbol": "MS", "dir": "BUY", "price": cartp_sell["MS"], "size": 3}
+                    write_to_exchange(exchange, buy_order)
+                    buy_order = {"type": "add", "order_id": 203, "symbol": "WFC", "dir": "BUY", "price": cartp_sell["WFC"], "size": 2}
+                    write_to_exchange(exchange, buy_order)
+
+                    print("converted!")
+
 
 
 

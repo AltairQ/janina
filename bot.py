@@ -79,7 +79,7 @@ def main():
     valbz_spread = 6
     vale_bid_price, vale_ask_price = 0, 0
 
-    xlf_spread = 8;
+    xlf_spread = 6;
 
     cartp_buy = {
         "XLF": -1,

@@ -218,15 +218,13 @@ def main():
                         # print("XLF sell order done", file=sys.stderr)
 
 
-
-
-        if exchange_message["type"] == "fill":
-            if exchange_message["symbol"] == "XLF":
-                xlf_count += (1 if exchange_message["dir"] == "BUY" else -1)*exchange_message["size"]
-                if xlf_count > 50:
-                        sell_order = {"type": "add", "order_id": 37, "symbol": "XLF", "dir": "SELL", "price": cartp_buy["XLF"], "size": 2}
-                        write_to_exchange(exchange, sell_order)
-                        print("Command sent:", sell_order, file=log_file)
+        # if exchange_message["type"] == "fill":
+        #     if exchange_message["symbol"] == "XLF":
+        #         xlf_count += (1 if exchange_message["dir"] == "BUY" else -1)*exchange_message["size"]
+        #         if xlf_count > 50:
+        #                 sell_order = {"type": "add", "order_id": 37, "symbol": "XLF", "dir": "SELL", "price": cartp_buy["XLF"], "size": 2}
+        #                 write_to_exchange(exchange, sell_order)
+        #                 print("Command sent:", sell_order, file=log_file)
 
 
 

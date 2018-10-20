@@ -221,10 +221,25 @@ def main():
         if exchange_message["type"] == "fill":
             if exchange_message["symbol"] == "XLF":
                 xlf_count += (1 if exchange_message["dir"] == "BUY" else -1)*exchange_message["size"]
-                if xlf_count > 50:
-                        sell_order = {"type": "add", "order_id": 48, "symbol": "XLF", "dir": "SELL", "price": cartp_buy["XLF"], "size": 2}
-                        write_to_exchange(exchange, sell_order)
-                        print("Command sent:", sell_order, file=log_file)
+                if xlf_count > 90:
+                    convert_order = {"type": "convert", "order_id": 69, "symbol":"XLF", "dir":"SELL", "size":10}
+                    print("converted sell xlf 10")
+                    write_to_exchange(exchange, convert_order)
+                    print("Command sent:", convert_order, file=log_file)
+                    print("The exchange replied:", read_from_exchange(exchange), file=log_file)
+                    buy_order = {"type": "add", "order_id": 100, "symbol": "BOND", "dir": "SELL", "price": cartp_buy["BOND"], "size": 3}
+                    write_to_exchange(exchange, buy_order)
+                    buy_order = {"type": "add", "order_id": 101, "symbol": "GS", "dir": "SELL", "price": cartp_buy["GS"], "size": 2}
+                    write_to_exchange(exchange, buy_order)
+                    buy_order = {"type": "add", "order_id": 102, "symbol": "MS", "dir": "SELL", "price": cartp_buy["MS"], "size": 3}
+                    write_to_exchange(exchange, buy_order)
+                    buy_order = {"type": "add", "order_id": 103, "symbol": "WFC", "dir": "SELL", "price": cartp_buy["WFC"], "size": 2}
+                    write_to_exchange(exchange, buy_order)
+
+                    print("converted!")
+
+
+
 
 
 

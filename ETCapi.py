@@ -54,10 +54,35 @@ def _handshake(ex):
     hello_from_exchange = read_from_exchange(ex)
     return hello_from_exchange
 
+def _handle_response(response):
+    order_id = response["order_id"]
+    if response["type"] == "reject":
+        return {
+            "type": "reject",
+            "error": response["error"],
+            "order_id": order_id,
+        }
+    elif response["type"] == "ack":
+        return {
+            "type": "ack",
+            "order_id": order_id,
+        }
+    else:
+        return {
+            "type": "other",
+            "order_id": order_id
+        }
+
 def hello():
     ex = connect()
     return _handshake(ex)
     
+'''
+IMPORTANT
+These functions return { "type": "ack|reject|other", "error":<reject reason> }
+"ack" and "reject" are obvious, "other" means mismatched response
+(like info about transaction)
+'''
 
 def add(order_id, symbol, dir, price, size):
     ex = connect()
@@ -72,19 +97,9 @@ def add(order_id, symbol, dir, price, size):
     }
 
     write_to_exchange(ex, params)
-
     response = read_from_exchange(ex)
-
-    if response["type"] == "reject":
-        pass
-        #TODO: HANDLE REJECT MESSAGE
-    elif response["type"] == "ack":
-        pass
-        #TODO: HANDLE ACK MESSAGE
-    else:
-        pass
-        #TODO: HANDLE MALFORMED MESSAGE
-
+    
+    return _handle_response(response)
 
 def convert(order_id, symbol, dir, size):
     ex = connect()
@@ -98,3 +113,6 @@ def convert(order_id, symbol, dir, size):
     }
 
     write_to_exchange(ex, params)
+    response = read_from_exchange(ex)
+    
+    return _handle_response(response)

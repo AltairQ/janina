@@ -60,7 +60,19 @@ def add(order_id, symbol, dir, price, size):
     }
 
     write_to_exchange(ex, params)
-    # TODO
+
+    response = read_from_exchange(ex)
+
+    if response["type"] == "reject":
+        pass
+        #TODO: HANDLE REJECT MESSAGE
+    elif response["type"] == "ack":
+        pass
+        #TODO: HANDLE ACK MESSAGE
+    else:
+        pass
+        #TODO: HANDLE MALFORMED MESSAGE
+
 
 def convert(order_id, symbol, dir, size)
     ex = connect()
@@ -72,3 +84,5 @@ def convert(order_id, symbol, dir, size)
         "dir": dir,
         "size": size,
     }
+
+    write_to_exchange(ex, params)

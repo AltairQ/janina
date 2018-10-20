@@ -83,7 +83,7 @@ def add(order_id, symbol, dir, price, size):
         #TODO: HANDLE MALFORMED MESSAGE
 
 
-def convert(order_id, symbol, dir, size)
+def convert(order_id, symbol, dir, size):
     ex = connect()
 
     params = {

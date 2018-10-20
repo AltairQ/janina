@@ -10,12 +10,30 @@ from __future__ import print_function
 import sys
 import socket
 import json
+import datetime
+
+test_mode = None
+
+if sys.argv[1] == "dev":
+    test_mode = True
+
+if sys.argv[1] == "prod":
+    test_mode = False
+
+if test_mode is None:
+    print("Wrong mode!")
+    sys.exit(3)
+
+
 
 # ~~~~~============== CONFIGURATION  ==============~~~~~
 team_name="PLASTICLOVE"
 # This variable dictates whether or not the bot is connecting to the prod
 # or test exchange. Be careful with this switch!
+<<<<<<< HEAD
 test_mode = False
+=======
+>>>>>>> c07608c70d5654eb59d3201135149d4cee784e86
 
 test_exchange_index=0
 prod_exchange_hostname="production"

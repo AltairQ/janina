@@ -12,6 +12,9 @@ team_name="PLASTICLOVE"
 # or test exchange. Be careful with this switch!
 test_mode = True
 
+s = None
+sfile = None
+
 # This setting changes which test exchange is connected to.
 # 0 is prod-like
 # 1 is slower

@@ -186,10 +186,10 @@ def main():
                     calc_buy, calc_sell = to_xlf(cartp_buy, cartp_sell)
                     xlf_theo = (calc_sell + calc_buy) / 2
 
-                    print("XLF DEBUG calc_buy: " + str(calc_buy) + " calc_sell: " + str(calc_sell) + " theo: " + str(xlf_theo))
+                    # print("XLF DEBUG calc_buy: " + str(calc_buy) + " calc_sell: " + str(calc_sell) + " theo: " + str(xlf_theo))
 
                     if (calc_buy >= xlf_theo) or (calc_sell <= xlf_theo):
-                        print("DUPA")
+                        # print("DUPA")
                         cancel_order = {"type": "cancel", "order_id": 21}
                         write_to_exchange(exchange, cancel_order)
                         print("Command sent:", cancel_order, file=log_file)

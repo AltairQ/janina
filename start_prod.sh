@@ -1,4 +1,4 @@
 git pull && while true; do
-	python bond-simple-bot.py
+	python bot.py prod
 	sleep 25
 done

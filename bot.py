@@ -188,7 +188,7 @@ def main():
 
                     print("XLF DEBUG calc_buy: " + str(calc_buy) + " calc_sell: " + str(calc_sell) + " theo: " + str(xlf_theo))
 
-                    if (calc_buy > xlf_theo) or (calc_sell < xlf_theo):
+                    if (calc_buy >= xlf_theo) or (calc_sell <= xlf_theo):
                         print("DUPA")
                         cancel_order = {"type": "cancel", "order_id": 21}
                         write_to_exchange(exchange, cancel_order)

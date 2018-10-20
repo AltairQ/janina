@@ -184,9 +184,9 @@ def main():
 
                 if -1 not in [v[1] for v in cartp_buy.items()] and [v[1] for v in cartp_sell.items()]:
                     calc_buy, calc_sell = to_xlf(cartp_buy, cartp_sell)
-                    xlf_theo = (calc_sell + calc_buy)/2
+                    xlf_theo = (calc_sell + calc_buy) / 2
 
-                    # print("XLF DEBUG calc_buy: " + str(calc_buy) + " calc_sell: " + str(calc_sell))
+                    print("XLF DEBUG calc_buy: " + str(calc_buy) + " calc_sell: " + str(calc_sell) + " theo: " + str(xlf_theo))
 
                     if (calc_buy > xlf_theo) or (calc_sell < xlf_theo):
                         print("DUPA")

@@ -95,6 +95,16 @@ def main():
                 write_to_exchange(exchange, sell_order)
                 print("Command sent:", sell_order, file=log_file)
                 print("The exchange replied:", read_from_exchange(exchange), file=log_file)
+            elif exchange_message['order_id'] == 3:
+                buy_order = {"type": "add", "order_id": 3, "symbol": "VALE", "dir": "BUY", "price": int(vale_bid_price), "size": 5}
+                write_to_exchange(exchange, buy_order)
+                print("Command sent:", buy_order, file=log_file)
+                print("The exchange replied:", read_from_exchange(exchange), file=log_file)
+            elif exchange_message['order_id'] == 4:
+                sell_order = {"type": "add", "order_id": 4, "symbol": "VALE", "dir": "SELL", "price": int(vale_ask_price), "size": 5}
+                write_to_exchange(exchange, sell_order)
+                print("Command sent:", sell_order, file=log_file)
+                print("The exchange replied:", read_from_exchange(exchange), file=log_file)
 
         # check and refresh VALE orders
 
@@ -119,13 +129,13 @@ def main():
                         vale_ask_price = round(valbz_theo + valbz_spread / 2)
                         vale_bid_price = round(valbz_theo - valbz_spread / 2)
 
-                        buy_order = {"type": "add", "order_id": 3, "symbol": "VALE", "dir": "BUY", "price": int(vale_bid_price), "size": 3}
+                        buy_order = {"type": "add", "order_id": 3, "symbol": "VALE", "dir": "BUY", "price": int(vale_bid_price), "size": 5}
                         write_to_exchange(exchange, buy_order)
                         print("Command sent:", buy_order, file=log_file)
                         print("The exchange replied:", read_from_exchange(exchange), file=log_file)
                         print("VALE buy order done", file=sys.stderr)
 
-                        sell_order = {"type": "add", "order_id": 4, "symbol": "VALE", "dir": "SELL", "price": int(vale_ask_price), "size": 3}
+                        sell_order = {"type": "add", "order_id": 4, "symbol": "VALE", "dir": "SELL", "price": int(vale_ask_price), "size": 5}
                         write_to_exchange(exchange, sell_order)
                         print("Command sent:", sell_order, file=log_file)
                         print("The exchange replied:", read_from_exchange(exchange), file=log_file)

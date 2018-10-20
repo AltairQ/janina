@@ -79,7 +79,7 @@ def main():
     valbz_spread = 6
     vale_bid_price, vale_ask_price = 0, 0
 
-    xlf_spread = 16;
+    xlf_spread = 8;
 
     cartp_buy = {
         "XLF": -1,
@@ -203,16 +203,18 @@ def main():
                         xlf_ask_price = round(xlf_theo + xlf_spread / 2)
                         xlf_bid_price = round(xlf_theo - xlf_spread / 2)
 
-                        buy_order = {"type": "add", "order_id": 21, "symbol": "XLF", "dir": "BUY", "price": int(xlf_bid_price), "size": 5}
+                        buy_order = {"type": "add", "order_id": 21, "symbol": "XLF", "dir": "BUY", "price": int(xlf_bid_price), "size": 1}
                         write_to_exchange(exchange, buy_order)
                         print("Command sent:", buy_order, file=log_file)
                         print("The exchange replied:", read_from_exchange(exchange), file=log_file)
                         print("XLF buy order done", file=sys.stderr)
 
-                        sell_order = {"type": "add", "order_id": 37, "symbol": "XLF", "dir": "SELL", "price": int(xlf_ask_price), "size": 5}
+                        sell_order = {"type": "add", "order_id": 37, "symbol": "XLF", "dir": "SELL", "price": int(xlf_ask_price), "size": 1}
                         write_to_exchange(exchange, sell_order)
                         print("Command sent:", sell_order, file=log_file)
                         print("The exchange replied:", read_from_exchange(exchange), file=log_file)
+                        print("XLF sell order done", file=sys.stderr)
+
 
 
 

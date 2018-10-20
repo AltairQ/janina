@@ -81,6 +81,8 @@ def main():
 
     xlf_spread = 32;
 
+    xlf_count = 0;
+
     cartp_buy = {
         "XLF": -1,
         "GS": -1,
@@ -190,7 +192,6 @@ def main():
                     # print("XLF DEBUG calc_buy: " + str(calc_buy) + " calc_sell: " + str(calc_sell) + " theo: " + str(xlf_theo))
 
                     if (xlf_theo > cartp_sell["XLF"]) or (xlf_theo < cartp_buy["XLF"]):
-                        # print("DUPA")
                         cancel_order = {"type": "cancel", "order_id": 21}
                         write_to_exchange(exchange, cancel_order)
                         print("Command sent:", cancel_order, file=log_file)
@@ -219,7 +220,10 @@ def main():
 
 
 
-        # if exchange_message["type"] == "fill":
+        if exchange_message["type"] == "fill":
+            if exchange_message["symbol"] == "XLF":
+                xlf_count += (1 if exchange_message["dir"] == "BUY" else -1)*exchange_message["size"]
+                print("xlf count = " + str(xlf_count))
 
 
 

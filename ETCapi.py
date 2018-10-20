@@ -32,7 +32,7 @@ def connect():
     if s is None:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((exchange_hostname, port))
-        sfile = s.makefile(rw, 1)
+        sfile = s.makefile("rw", 1)
 
     return sfile
 

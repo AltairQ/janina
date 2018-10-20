@@ -186,7 +186,7 @@ def main():
                     calc_buy, calc_sell = to_xlf(cartp_buy, cartp_sell)
                     xlf_theo = (calc_sell + calc_buy)/2
 
-                    print("XLF DEBUG calc_buy: " + str(calc_buy) + " calc_sell: " + str(calc_sell))
+                    # print("XLF DEBUG calc_buy: " + str(calc_buy) + " calc_sell: " + str(calc_sell))
 
                     if (calc_buy > xlf_theo) or (calc_sell < xlf_theo):
                         cancel_order = {"type": "cancel", "order_id": 21}

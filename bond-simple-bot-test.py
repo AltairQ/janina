@@ -46,7 +46,7 @@ def read_from_exchange(exchange):
 def main():
     exchange = connect()
 
-    log_file = open('logs/trading_log_test', mode='w')
+    log_file = open('logs/trading_log_test', mode='a')
     write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
     hello_from_exchange = read_from_exchange(exchange)
     print("The exchange replied:", hello_from_exchange, file=log_file)

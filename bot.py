@@ -79,7 +79,7 @@ def main():
     valbz_spread = 6
     vale_bid_price, vale_ask_price = 0, 0
 
-    xlf_spread = 4;
+    xlf_spread = 1;
 
     cartp_buy = {
         "XLF": -1,
@@ -199,8 +199,8 @@ def main():
                         print("Command sent:", cancel_order, file=log_file)
                         print("The exchange replied:", read_from_exchange(exchange), file=log_file)
 
-                        xlf_ask_price = round(xlf_theo + xlf_spread / 2)
-                        xlf_bid_price = round(xlf_theo - xlf_spread / 2)
+                        xlf_ask_price = xlf_theo + xlf_spread
+                        xlf_bid_price = xlf_theo - xlf_spread
 
                         buy_order = {"type": "add", "order_id": 21, "symbol": "XLF", "dir": "BUY", "price": int(xlf_bid_price), "size": 10}
                         write_to_exchange(exchange, buy_order)

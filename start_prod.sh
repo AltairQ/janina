@@ -1,4 +1,4 @@
 git pull && while true; do
 	python bot.py prod
-	sleep 25
+	sleep 5
 done

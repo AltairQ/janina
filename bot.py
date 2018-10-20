@@ -57,7 +57,7 @@ def h_to_xlf(dic):
     return (3*dic['BOND'] +
             2*dic['GS'] +
             3*dic['MS'] +
-            2*dic['WFC']) // 10
+            2*dic['WFC']) / 10
 
 def to_xlf(buy, sell):
     return (h_to_xlf(buy), h_to_xlf(sell))
@@ -79,7 +79,7 @@ def main():
     valbz_spread = 6
     vale_bid_price, vale_ask_price = 0, 0
 
-    xlf_spread = 1;
+    xlf_spread = 2;
 
     cartp_buy = {
         "XLF": -1,
@@ -189,6 +189,7 @@ def main():
                     # print("XLF DEBUG calc_buy: " + str(calc_buy) + " calc_sell: " + str(calc_sell))
 
                     if (calc_buy > xlf_theo) or (calc_sell < xlf_theo):
+                        print("DUPA")
                         cancel_order = {"type": "cancel", "order_id": 21}
                         write_to_exchange(exchange, cancel_order)
                         print("Command sent:", cancel_order, file=log_file)
@@ -199,8 +200,8 @@ def main():
                         print("Command sent:", cancel_order, file=log_file)
                         print("The exchange replied:", read_from_exchange(exchange), file=log_file)
 
-                        xlf_ask_price = xlf_theo + xlf_spread
-                        xlf_bid_price = xlf_theo - xlf_spread
+                        xlf_ask_price = round(xlf_theo + xlf_spread / 2)
+                        xlf_bid_price = round(xlf_theo - xlf_spread / 2)
 
                         buy_order = {"type": "add", "order_id": 21, "symbol": "XLF", "dir": "BUY", "price": int(xlf_bid_price), "size": 10}
                         write_to_exchange(exchange, buy_order)

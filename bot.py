@@ -209,13 +209,13 @@ def main():
                         write_to_exchange(exchange, buy_order)
                         print("Command sent:", buy_order, file=log_file)
                         print("The exchange replied:", read_from_exchange(exchange), file=log_file)
-                        print("XLF buy order done", file=sys.stderr)
+                        # print("XLF buy order done", file=sys.stderr)
 
                         sell_order = {"type": "add", "order_id": 37, "symbol": "XLF", "dir": "SELL", "price": int(xlf_ask_price), "size": 1}
                         write_to_exchange(exchange, sell_order)
                         print("Command sent:", sell_order, file=log_file)
                         print("The exchange replied:", read_from_exchange(exchange), file=log_file)
-                        print("XLF sell order done", file=sys.stderr)
+                        # print("XLF sell order done", file=sys.stderr)
 
 
 

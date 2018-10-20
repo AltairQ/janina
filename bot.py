@@ -79,7 +79,7 @@ def main():
     valbz_spread = 6
     vale_bid_price, vale_ask_price = 0, 0
 
-    xlf_spread = 2;
+    xlf_spread = 4;
 
     cartp_buy = {
         "XLF": -1,
@@ -188,7 +188,7 @@ def main():
 
                     # print("XLF DEBUG calc_buy: " + str(calc_buy) + " calc_sell: " + str(calc_sell) + " theo: " + str(xlf_theo))
 
-                    if (calc_buy >= xlf_theo) or (calc_sell <= xlf_theo):
+                    if (calc_buy > xlf_theo) or (calc_sell < xlf_theo):
                         # print("DUPA")
                         cancel_order = {"type": "cancel", "order_id": 21}
                         write_to_exchange(exchange, cancel_order)

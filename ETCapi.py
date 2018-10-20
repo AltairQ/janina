@@ -55,7 +55,7 @@ def _handshake(ex):
     return hello_from_exchange
 
 def _handle_response(response):
-    order_id = response["order_id"]
+    order_id = response.get("order_id")
     if response["type"] == "reject":
         return {
             "type": "reject",
@@ -111,6 +111,16 @@ def convert(order_id, symbol, dir, size):
         "dir": dir,
         "size": size,
     }
+
+    write_to_exchange(ex, params)
+    response = read_from_exchange(ex)
+    
+    return _handle_response(response)
+
+def cancel(order_id):
+    ex = connect()
+
+    params = { "order_id": order_id }
 
     write_to_exchange(ex, params)
     response = read_from_exchange(ex)

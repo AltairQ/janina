@@ -183,7 +183,7 @@ def main():
                     cartp_sell[exchange_message['symbol']] = min([v[0] for v in exchange_message['sell']])
 
                 if -1 not in [v[1] for v in cartp_buy.items()] and [v[1] for v in cartp_sell.items()]:
-                    calc_buy, calc_sell = to_xlf(cartp_buy, calc_sell)
+                    calc_buy, calc_sell = to_xlf(cartp_buy, cartp_sell)
                     xlf_theo = (calc_sell + calc_buy)/2
 
                     if (calc_buy > xlf_theo) or (calc_sell < xlf_theo):

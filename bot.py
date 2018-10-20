@@ -30,10 +30,6 @@ if test_mode is None:
 team_name="PLASTICLOVE"
 # This variable dictates whether or not the bot is connecting to the prod
 # or test exchange. Be careful with this switch!
-<<<<<<< HEAD
-test_mode = False
-=======
->>>>>>> c07608c70d5654eb59d3201135149d4cee784e86
 
 test_exchange_index=0
 prod_exchange_hostname="production"

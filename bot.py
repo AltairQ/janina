@@ -79,7 +79,7 @@ def main():
     valbz_spread = 6
     vale_bid_price, vale_ask_price = 0, 0
 
-    xlf_spread = 8;
+    xlf_spread = 32;
 
     cartp_buy = {
         "XLF": -1,
@@ -182,7 +182,6 @@ def main():
                 if len(exchange_message['sell']) > 0:
                     cartp_sell[exchange_message['symbol']] = min([v[0] for v in exchange_message['sell']])
 
-                continue
 
                 if -1 not in [v[1] for v in cartp_buy.items()] and [v[1] for v in cartp_sell.items()]:
                     calc_buy, calc_sell = to_xlf(cartp_buy, cartp_sell)

@@ -50,16 +50,52 @@ def write_to_exchange(exchange, obj):
 def read_from_exchange(exchange):
     return json.loads(exchange.readline())
 
-
 # ~~~~~============== MAIN LOOP ==============~~~~~
+
+
+def h_to_xlf(dic):
+    return (3*dic['BOND'] +
+            2*dic['GS'] +
+            3*dic['MS'] +
+            2*dic['WFC']) // 10
+
+def to_xlf(buy, sell):
+    return (h_to_xlf(buy), h_to_xlf(sell))
+
+    
+
+
 
 def main():
     print("Test mode: ", test_mode)
     exchange = connect()
 
+    pending = {}
+    wallet = {}
+
+    cid = 3;
+
     valbz_theo = 0
     valbz_spread = 6
     vale_bid_price, vale_ask_price = 0, 0
+
+    xlf_spread = 2;
+
+    cartp_buy = {
+        "XLF": -1,
+        "GS": -1,
+        "MS": -1,
+        "WFC": -1,
+        "BOND": 1000
+    }
+
+    cartp_sell = {
+        "XLF": -1,
+        "GS": -1,
+        "MS": -1,
+        "WFC": -1,
+        "BOND": 1000
+    }
 
     log_file = open('logs/trading_log_test_observer', mode='w')
     write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
@@ -129,6 +165,53 @@ def main():
                         write_to_exchange(exchange, sell_order)
                         print("Command sent:", sell_order, file=log_file)
                         print("The exchange replied:", read_from_exchange(exchange), file=log_file)
+            elif exchange_message['symbol'] in ['XLF', 'GS', 'MS', 'WFC']:
+                if len(exchange_message['buy']) > 0:
+                    cartp_buy[exchange_message['symbol']] = max([v[0] for v in exchange_message['buy']])
+
+                if len(exchange_message['sell']) > 0:
+                    cartp_sell[exchange_message['symbol']] = min([v[0] for v in exchange_message['sell']])
+
+                if -1 not in [v[1] for v in cartp_buy.items()] and [v[1] for v in cartp_sell.items()]
+                    calc_buy, calc_sell = to_xlf(cartp_buy, calc_sell)
+                    xlf_theo = (calc_sell + calc_buy)/2
+
+                    if (calc_buy > xlf_theo) or (calc_sell < xlf_theo):
+                        cancel_order = {"type": "cancel", "order_id": 21}
+                        write_to_exchange(exchange, cancel_order)
+                        print("Command sent:", cancel_order, file=log_file)
+                        print("The exchange replied:", read_from_exchange(exchange), file=log_file)
+
+                        cancel_order = {"type": "cancel", "order_id": 37}
+                        write_to_exchange(exchange, cancel_order)
+                        print("Command sent:", cancel_order, file=log_file)
+                        print("The exchange replied:", read_from_exchange(exchange), file=log_file)
+
+                        xlf_ask_price = round(xlf_theo + xlf_spread / 2)
+                        xlf_bid_price = round(xlf_theo - xlf_spread / 2)
+
+                        buy_order = {"type": "add", "order_id": 21, "symbol": "XLF", "dir": "BUY", "price": int(xlf_bid_price), "size": 10}
+                        write_to_exchange(exchange, buy_order)
+                        print("Command sent:", buy_order, file=log_file)
+                        print("The exchange replied:", read_from_exchange(exchange), file=log_file)
+                        print("XLF buy order done", file=sys.stderr)
+
+                        sell_order = {"type": "add", "order_id": 37, "symbol": "XLF", "dir": "SELL", "price": int(xlf_ask_price), "size": 10}
+                        write_to_exchange(exchange, sell_order)
+                        print("Command sent:", sell_order, file=log_file)
+                        print("The exchange replied:", read_from_exchange(exchange), file=log_file)
+
+
+
+        # if exchange_message["type"] == "fill":
+
+
+
+
+
+                    
+
+
 
 if __name__ == "__main__":
     main()

@@ -60,4 +60,14 @@ def add(order_id, symbol, dir, price, size):
     }
 
     write_to_exchange(ex, params)
-    # TODO
+    response = read_from_exchange(ex)
+
+    if response["type"] == "reject":
+        #TODO: HANDLE REJECT MESSAGE
+    elif reponse["type"] == "ack":
+        #TODO: HANDLE ACK MESSAGE
+    else:
+        #TODO: HANDLE MALFORMED MESSAGE
+    
+    
+

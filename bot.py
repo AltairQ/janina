@@ -239,7 +239,7 @@ def main():
                     print("converted!")
 
                 if xlf_count < -90:
-                    convert_order = {"type": "convert", "order_id": 69, "symbol":"XLF", "dir":"BUY", "size":10}
+                    convert_order = {"type": "convert", "order_id": 96, "symbol":"XLF", "dir":"BUY", "size":10}
                     print("converted BUY xlf 10")
                     write_to_exchange(exchange, convert_order)
                     print("Command sent:", convert_order, file=log_file)

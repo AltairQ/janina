@@ -24,9 +24,18 @@ exchange_hostname = "test-exch-" + team_name if test_mode else prod_exchange_hos
 
 # ~~~~~============== NETWORKING CODE ==============~~~~~
 def connect():
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((exchange_hostname, port))
-    return s.makefile('rw', 1)
+    global s
+    global sfile
+    if s is None:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((exchange_hostname, port))
+        sfile = s.makefile(rw, 1)
+
+    return sfile
+
+def reset_connect():
+    global s
+    s = None
 
 def write_to_exchange(exchange, obj):
     json.dump(obj, exchange)
